@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Show do Milhão</title>
 </head>
 <body>
-    <h1>Seja bem-vindo ao jogo do milhão</h1>
-    <h2>Digite o seu nick name</h2>
-    <form action="">
-        <input type="text" name="nickname" id="nickname">
+    <h1>Seja bem-vindo ao Show do Milhão</h1>
+    <h2>Digite o seu nickname</h2>
+    <form action="/start" method="post">
+        <input type="text" name="nickname" id="nickname" placeholder="Digite seu nickname" required>
         <button type="submit">Iniciar</button>
     </form>
 
-    <h2>Ranking</h2>
-    <table>
+    <h2>Ranking de Usuários</h2>
+    <table border="1">
         <thead>
             <tr>
                 <th>Posição</th>
@@ -23,21 +23,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>João</td>
-                <td>1000000</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Maria</td>
-                <td>500000</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>José</td>
-                <td>250000</td>
+            <tr th:each="usuario, iterStat : ${usuarios}">
+                <td th:text="${iterStat.index + 1}">1</td> <!-- Exibe a posição -->
+                <td th:text="${usuario.nickname}">Nome do Usuário</td> <!-- Exibe o nome -->
+                <td th:text="${usuario.pontuacao}">0</td> <!-- Exibe a pontuação -->
             </tr>
         </tbody>
+    </table>
 </body>
 </html>

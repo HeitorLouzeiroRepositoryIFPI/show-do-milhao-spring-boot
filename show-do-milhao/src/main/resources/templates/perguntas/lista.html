@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas</title>
+</head>
+<body>
+    <h1>Perguntas para: <span th:text="${nickname}">Nickname</span></h1>
+    <div th:each="pergunta : ${perguntas}">
+        <h2 th:text="${pergunta.pergunta}">Pergunta</h2>
+        <ul>
+            <li th:each="opcao : ${pergunta.opcoes}" th:text="${opcao}">Opção</li>
+        </ul>
+    </div>
+</body>
+</html>

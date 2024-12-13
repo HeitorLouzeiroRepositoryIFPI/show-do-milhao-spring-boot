@@ -1,6 +1,7 @@
 package br.com.heitorlouzeiro.show_do_milhao.service;
 
 import br.com.heitorlouzeiro.show_do_milhao.models.Pergunta;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -13,15 +14,22 @@ import java.util.List;
 @Service
 public class PerguntaService {
 
+    private final ObjectMapper objectMapper;
+
+    public PerguntaService(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     private List<Pergunta> perguntas;
 
     @PostConstruct
-    public void init() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<Pergunta>> typeReference = new TypeReference<List<Pergunta>>() {};
-        InputStream inputStream = TypeReference.class.getResourceAsStream("utils/perguntas.json");
+    public void init() throws IOException {
+        InputStream inputStream = getClass().getResourceAsStream("/utils/perguntas.json");
+        if (inputStream == null) {
+            throw new IllegalArgumentException("Resource not found: /utils/perguntas.json");
+        }
         try {
-            perguntas = objectMapper.readValue(inputStream, typeReference);
+            perguntas = objectMapper.readValue(inputStream, new TypeReference<List<Pergunta>>() {});
         } catch (IOException e) {
             throw new RuntimeException("Erro ao carregar perguntas do arquivo JSON", e);
         }

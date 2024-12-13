@@ -15,9 +15,10 @@
     <div id="perguntas-container">
         <div th:each="pergunta, iterStat : ${perguntas}" th:id="'pergunta-' + ${iterStat.index}" class="pergunta">
             <h2 th:text="${pergunta.pergunta}">Pergunta</h2>
-            <ul>
-                <li th:each="opcao : ${pergunta.opcoes}" th:text="${opcao}">Opção</li>
-            </ul>
+            <div th:each="opcao, idx : ${pergunta.opcoes}">
+                <input type="checkbox" th:id="'opcao-' + ${iterStat.index} + '-' + ${idx}" th:name="'opcao-' + ${iterStat.index}" th:value="${opcao}">
+                <label th:for="'opcao-' + ${iterStat.index} + '-' + ${idx}" th:text="${opcao}">Opção</label>
+            </div>
         </div>
     </div>
     <button id="prev-btn" onclick="showPrevious()">Anterior</button>

@@ -11,7 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface Repositorio extends CrudRepository<Usuario, Integer> {
 
    
-@Query("SELECT u FROM Usuario u ORDER BY u.pontuacao DESC")
+@Query("SELECT u FROM Usuario u ORDER BY u.pontuacao DESC LIMIT 10")
 List<Usuario> findTop10ByRanking();
 
 }

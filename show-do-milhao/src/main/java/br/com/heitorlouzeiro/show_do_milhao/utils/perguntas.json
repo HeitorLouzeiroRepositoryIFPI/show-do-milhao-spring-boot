@@ -1,0 +1,114 @@
+[
+    {
+      "id": 1,
+      "pergunta": "Qual o menor país do mundo?",
+      "opcoes": ["Vaticano", "Nauru", "Mônaco", "Tuvalu"],
+      "resposta_correta": "Vaticano",
+      "pontuacao": 100
+    },
+    {
+      "id": 2,
+      "pergunta": "Qual a capital da Austrália?",
+      "opcoes": ["Sydney", "Melbourne", "Canberra", "Perth"],
+      "resposta_correta": "Canberra",
+      "pontuacao": 200
+    },
+    {
+      "id": 3,
+      "pergunta": "Quantos ossos tem o corpo humano adulto?",
+      "opcoes": ["206", "187", "213", "198"],
+      "resposta_correta": "206",
+      "pontuacao": 300
+    },
+    {
+      "id": 4,
+      "pergunta": "Qual o maior planeta do sistema solar?",
+      "opcoes": ["Júpiter", "Saturno", "Marte", "Terra"],
+      "resposta_correta": "Júpiter",
+      "pontuacao": 400
+    },
+    {
+      "id": 5,
+      "pergunta": "Quem pintou a Mona Lisa?",
+      "opcoes": ["Leonardo da Vinci", "Michelangelo", "Rafael", "Donatello"],
+      "resposta_correta": "Leonardo da Vinci",
+      "pontuacao": 500
+    },
+    {
+      "id": 6,
+      "pergunta": "Em que ano começou a Primeira Guerra Mundial?",
+      "opcoes": ["1914", "1917", "1918", "1920"],
+      "resposta_correta": "1914",
+      "pontuacao": 600
+    },
+    {
+      "id": 7,
+      "pergunta": "Qual o metal mais abundante na crosta terrestre?",
+      "opcoes": ["Alumínio", "Ferro", "Cálcio", "Sódio"],
+      "resposta_correta": "Alumínio",
+      "pontuacao": 700
+    },
+    {
+      "id": 8,
+      "pergunta": "Qual a fórmula química da água?",
+      "opcoes": ["H2O", "CO2", "NaCl", "H2SO4"],
+      "resposta_correta": "H2O",
+      "pontuacao": 800
+    },
+    {
+      "id": 9,
+      "pergunta": "Quantos dentes tem um humano adulto?",
+      "opcoes": ["32", "28", "30", "34"],
+      "resposta_correta": "32",
+      "pontuacao": 900
+    },
+    {
+      "id": 10,
+      "pergunta": "Qual o maior mamífero terrestre?",
+      "opcoes": ["Elefante africano", "Rinoceronte branco", "Hipopótamo", "Girafa"],
+      "resposta_correta": "Elefante africano",
+      "pontuacao": 1000
+    },
+    {
+      "id": 11,
+      "pergunta": "Em que continente fica o Egito?",
+      "opcoes": ["África", "Ásia", "Europa", "Oceania"],
+      "resposta_correta": "África",
+      "pontuacao": 1100
+    },
+    {
+      "id": 12,
+      "pergunta": "Qual a unidade de medida da força?",
+      "opcoes": ["Newton", "Joule", "Watt", "Pascal"],
+      "resposta_correta": "Newton",
+      "pontuacao": 1200
+    },
+    {
+      "id": 13,
+      "pergunta": "Quem escreveu Romeu e Julieta?",
+      "opcoes": ["William Shakespeare", "Charles Dickens", "Jane Austen", "Oscar Wilde"],
+      "resposta_correta": "William Shakespeare",
+      "pontuacao": 1300
+    },
+    {
+      "id": 14,
+      "pergunta": "Qual o gás mais abundante na atmosfera terrestre?",
+      "opcoes": ["Nitrogênio", "Oxigênio", "Argônio", "Dióxido de carbono"],
+      "resposta_correta": "Nitrogênio",
+      "pontuacao": 1400
+    },
+    {
+      "id": 15,
+      "pergunta": "Qual a capital do Brasil?",
+      "opcoes": ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"],
+      "resposta_correta": "Brasília",
+      "pontuacao": 1500
+    },
+    {
+      "id": 16,
+      "pergunta": "Qual o símbolo químico do ouro?",
+      "opcoes": ["Au", "Ag", "Fe", "Cu"],
+      "resposta_correta": "Au",
+      "pontuacao": 1600
+    }
+  ]

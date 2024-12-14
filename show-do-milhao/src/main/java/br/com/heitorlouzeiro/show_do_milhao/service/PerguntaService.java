@@ -1,7 +1,6 @@
 package br.com.heitorlouzeiro.show_do_milhao.service;
 
 import br.com.heitorlouzeiro.show_do_milhao.models.Pergunta;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,11 @@ import java.util.List;
 public class PerguntaService {
 
     private final ObjectMapper objectMapper;
+    private List<Pergunta> perguntas;
 
     public PerguntaService(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
-
-    private List<Pergunta> perguntas;
 
     @PostConstruct
     public void init() throws IOException {

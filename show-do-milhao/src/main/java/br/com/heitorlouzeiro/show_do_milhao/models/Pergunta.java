@@ -6,7 +6,7 @@ public class Pergunta {
     private Integer id;
     private String pergunta;
     private List<String> opcoes;
-    private String respostaCorreta;
+    private String resposta_correta;
     private int pontuacao;
 
     // Getters e Setters
@@ -34,12 +34,12 @@ public class Pergunta {
         this.opcoes = opcoes;
     }
 
-    public String getRespostaCorreta() {
-        return respostaCorreta;
+    public String getresposta_correta() {
+        return resposta_correta;
     }
 
     public void setRespostaCorreta(String respostaCorreta) {
-        this.respostaCorreta = respostaCorreta;
+        this.resposta_correta = respostaCorreta;
     }
 
     public int getPontuacao() {

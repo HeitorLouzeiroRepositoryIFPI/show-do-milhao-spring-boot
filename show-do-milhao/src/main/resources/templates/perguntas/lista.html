@@ -3,41 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perguntas</title>
+    <title>Perguntas - Show do Milhão</title>
+    <!-- Link do Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         .pergunta {
             display: none;
         }
+        .resposta-correta {
+            color: green;
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
-<body>
-    <h1>Perguntas para: <span th:text="${nickname}">Nickname</span></h1>
-    <div id="perguntas-container">
-        <div th:each="pergunta, iterStat : ${perguntas}" th:id="'pergunta-' + ${iterStat.index}" class="pergunta">
-            <h2 th:text="${pergunta.pergunta}">Pergunta</h2>
-            <div th:each="opcao, idx : ${pergunta.opcoes}">
-                <input type="checkbox" th:id="'opcao-' + ${iterStat.index} + '-' + ${idx}" th:name="'opcao-' + ${iterStat.index}" th:value="${opcao}">
-                <label th:for="'opcao-' + ${iterStat.index} + '-' + ${idx}" th:text="${opcao}">Opção</label>
-            </div>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Perguntas para: <span id="nickname" class="text-primary"></span></h1>
+
+        <!-- Perguntas -->
+        <div id="perguntas-container"></div>
+
+        <div class="text-center my-4">
+            <button id="prev-btn" class="btn btn-secondary" onclick="showPrevious()">Anterior</button>
+            <button id="next-btn" class="btn btn-primary" onclick="showNext()">Próxima</button>
         </div>
     </div>
-    <button id="prev-btn" onclick="showPrevious()">Anterior</button>
-    <button id="next-btn" onclick="showNext()">Próxima</button>
 
+    <!-- Link do Bootstrap JS e dependências -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+        const nickname = new URLSearchParams(window.location.search).get('nickname');
+        document.getElementById('nickname').textContent = nickname;
+
         let currentQuestionIndex = 0;
-        const questions = document.querySelectorAll('.pergunta');
+        let questions = [];
+
+        function loadQuestions() {
+            fetch('/api/perguntas')
+                .then(response => response.json())
+                .then(data => {
+                    questions = data;
+                    displayQuestions();
+                    showQuestion(currentQuestionIndex);
+                });
+                
+        }
+
+        function displayQuestions() {
+            const container = document.getElementById('perguntas-container');
+            container.innerHTML = '';
+            questions.forEach((pergunta, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'pergunta card p-4 mb-3';
+                questionDiv.dataset.resposta = pergunta.resposta_correta;
+                questionDiv.id = `pergunta-${index}`;
+
+                const questionTitle = document.createElement('h3');
+                questionTitle.className = 'text-center mb-3';
+                questionTitle.textContent = pergunta.pergunta;
+                questionDiv.appendChild(questionTitle);
+                
+                pergunta.opcoes.forEach((opcao, idx) => {
+                    
+                    const optionDiv = document.createElement('div');
+
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.id = `opcao-${index}-${idx}`;
+                    radio.name = `opcao-${index}`;
+                    radio.value = opcao;
+                    optionDiv.appendChild(radio);
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `opcao-${index}-${idx}`;
+                    label.textContent = opcao;
+                    label.className = 'ml-2';
+                    optionDiv.appendChild(label);
+
+                    questionDiv.appendChild(optionDiv);
+                });
+
+                const respostaCorreta = document.createElement('p');
+                respostaCorreta.className = 'resposta-correta';
+                respostaCorreta.textContent = `Resposta correta: ${pergunta.resposta_correta}`;
+                questionDiv.appendChild(respostaCorreta);
+
+                container.appendChild(questionDiv);
+            });
+        }
 
         function showQuestion(index) {
+            const questions = document.querySelectorAll('.pergunta');
             questions.forEach((question, i) => {
                 question.style.display = i === index ? 'block' : 'none';
             });
         }
 
         function showNext() {
-            if (currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
+            const currentQuestion = questions[currentQuestionIndex];
+            const selectedOption = document.querySelector(`input[name="opcao-${currentQuestionIndex}"]:checked`);
+            const correctAnswer = currentQuestion;  // Resposta correta
+
+            console.log(correctAnswer);
+
+            if (selectedOption) {
+                const isCorrect = selectedOption.value === correctAnswer.resposta_correta;  // Verifica se a opção está correta
+                console.log(isCorrect);
+
+                const respostaCorretaElement = document.querySelector(`#pergunta-${currentQuestionIndex} .resposta-correta`);
+                respostaCorretaElement.style.display = 'block';
+                respostaCorretaElement.textContent = isCorrect ? 'Correta' : 'Incorreta';  // Define como 'true' ou 'false'
+
+                // Se a resposta estiver correta, avança para a próxima pergunta
+                if (isCorrect) {
+                    if (currentQuestionIndex < questions.length - 1) {
+                        currentQuestionIndex++;
+                        showQuestion(currentQuestionIndex);
+                    } else {
+                        alert("Você completou todas as perguntas!");
+                    }
+                }
+            } else {
+                alert("Por favor, selecione uma opção antes de prosseguir.");
             }
         }
 
@@ -48,8 +137,8 @@
             }
         }
 
-        // Mostrar a primeira pergunta ao carregar a página
-        showQuestion(currentQuestionIndex);
+        loadQuestions();
     </script>
+
 </body>
 </html>
